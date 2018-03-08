@@ -24,6 +24,7 @@ class LandingController extends Controller
         $metrics = $startup->metrics()->orderBy('recorded_at', 'desc')->limit(30)->get();
 
         $data = [
+            'startup' => $startup,
             'dates' => array_pluck($metrics, 'date'),
             'currency' => $startup->currency,
             'monthly' => array_pluck($metrics, Metric::MONTHLY_REVENUE),

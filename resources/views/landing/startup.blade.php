@@ -1,14 +1,28 @@
 @extends('layouts.dashboard')
 
 @section('container')
-    <div>
-        <canvas id="canvas1"></canvas>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{$startup->name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{$startup->user->name}}</h6>
+            <p class="card-text">{{$startup->speech}}</p>
+            <a href="{{$startup->website}}" class="card-link">{{$startup->website}}</a>
+        </div>
     </div>
-    <div>
-        <canvas id="canvas2"></canvas>
+    <div class="card mt-2">
+        <div class="card-body">
+            <canvas id="canvas1"></canvas>
+        </div>
     </div>
-    <div>
-        <canvas id="canvas3"></canvas>
+    <div class="card mt-2">
+        <div class="card-body">
+            <canvas id="canvas2"></canvas>
+        </div>
+    </div>
+    <div class="card mt-2">
+        <div class="card-body">
+            <canvas id="canvas3"></canvas>
+        </div>
     </div>
 @endsection
 
@@ -58,7 +72,7 @@
                 },
                 ticks: {
                   // Include a dollar sign in the ticks
-                  callback: function(value, index, values) {
+                  callback: function (value, index, values) {
                     if (label === "USD")
                       return '$' + value.toFixed(1);
                     if (label === "EUR")
