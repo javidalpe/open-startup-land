@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateStartupRequest;
 use App\Repositories\StartupRepository;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\Auth;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 
@@ -55,7 +56,7 @@ class StartupController extends Controller
     public function store(CreateStartupRequest $request)
     {
         $input = $request->all();
-
+	    $input['user_id'] = Auth::id();
         $startup = $this->startupRepository->create($input);
 
         Flash::success('Startup saved successfully.');
