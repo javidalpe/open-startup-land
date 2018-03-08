@@ -14,3 +14,15 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::resource('startups', 'StartupController');
+
+Route::resource('startups', 'StartupController');
+
+Route::resource('startups', 'StartupController');
+
+Route::resource('startups', 'StartupController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

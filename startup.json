@@ -33,7 +33,7 @@
     {
         "name": "website",
         "dbType": "string",
-        "htmlType": "url",
+        "htmlType": "text",
         "validations": "required|min:2|max:80",
         "searchable": true,
         "fillable": true,
@@ -41,8 +41,19 @@
         "inIndex": true
     },
     {
+        "name": "api_endpoint",
+        "dbType": "string",
+        "htmlType": "text",
+        "validations": "required|min:2|max:80",
+        "searchable": true,
+        "fillable": true,
+        "inForm": true,
+        "inIndex": false
+    },
+    {
         "name": "currency",
         "dbType": "string",
+        "htmlType": "select,USD,EUR",
         "validations": "required",
         "searchable": false,
         "fillable": true,
