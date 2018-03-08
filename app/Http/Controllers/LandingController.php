@@ -25,6 +25,7 @@ class LandingController extends Controller
 
         $data = [
             'dates' => array_pluck($metrics, 'date'),
+            'currency' => $startup->currency,
             'monthly' => array_pluck($metrics, Metric::MONTHLY_REVENUE),
             'paid' => array_pluck($metrics, Metric::PAID_USERS),
             'free' => array_pluck($metrics, Metric::FREE_USERS),

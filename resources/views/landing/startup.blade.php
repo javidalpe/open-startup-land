@@ -16,7 +16,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
     <script>
 
-      var createChart = function (title, data, elementId) {
+      var createChart = function (title, data, elementId, label) {
         var config = {
           type: 'line',
           data: {
@@ -32,8 +32,7 @@
           options: {
             responsive: true,
             title: {
-              display: true,
-              text: 'Chart.js Line Chart'
+              display: false
             },
             tooltips: {
               mode: 'index',
@@ -47,15 +46,25 @@
               xAxes: [{
                 display: true,
                 scaleLabel: {
-                  display: true,
-                  labelString: 'Month'
+                  display: false,
+                  labelString: 'Day'
                 }
               }],
               yAxes: [{
                 display: true,
                 scaleLabel: {
                   display: true,
-                  labelString: 'Value'
+                  labelString: label
+                },
+                ticks: {
+                  // Include a dollar sign in the ticks
+                  callback: function(value, index, values) {
+                    if (label === "USD")
+                      return '$' + value.toFixed(1);
+                    if (label === "EUR")
+                      return value.toFixed(1) + '€'
+                    return value.toFixed(0);
+                  }
                 }
               }]
             }
@@ -67,9 +76,9 @@
 
       };
       window.onload = function () {
-        createChart('Monthly revenue', @json($monthly), 'canvas1');
-        createChart('Total paid users', @json($paid), 'canvas2');
-        createChart('Total free users', @json($free), 'canvas3');
+        createChart('Monthly revenue', @json($monthly), 'canvas1', @json($currency));
+        createChart('Total paid users', @json($paid), 'canvas2', 'Users');
+        createChart('Total free users', @json($free), 'canvas3', 'Users');
       }
     </script>
 @endpush
