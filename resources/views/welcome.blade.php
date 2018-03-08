@@ -8,6 +8,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
         <!-- Styles -->
@@ -79,8 +80,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    {{ config('app.name', 'Laravel') }}
+                    Open Startup Land
                 </div>
+
+                <p class="lead">Welcome to the land of the brave. These wonderful companies are embracing transparency and openness by sharing their metrics with everyone.</p>
 
                 <h4>Last startups</h4>
                 <a class="links">
@@ -88,6 +91,7 @@
                         <a class="card" style="width: 18rem;" href="{{route('landing.startup', [str_slug($startup->name), $startup->id])}}">
                             <div class="card-body">
                                 <div class="card-title">{{$startup->name}}</div>
+                                <p class="card-text">{{$startup->speech}}</p>
                             </div>
                         </a>
                     @endforeach

@@ -11,7 +11,7 @@
             <div class="box-body">
                 <div class="row" style="padding-left: 20px">
                     @include('startups.show_fields')
-                    <a href="{!! route('startups.index') !!}" class="btn btn-default">Back</a>
+                    <a href="{!! route('startups.index') !!}" class="btn btn-light" role="button">Back</a>
                 </div>
             </div>
         </div>
