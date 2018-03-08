@@ -57,6 +57,8 @@ class Metric extends Model
         self::FREE_USERS => 'required|numeric'
     ];
 
+    public $timestamps = false;
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/

@@ -8,7 +8,7 @@ use App\Startup;
 
 class CheckStartup extends CheckEndpoint implements ICommand
 {
-    private $startup;
+    protected $startup;
 
     /**
      * CheckStartup constructor.
@@ -25,5 +25,6 @@ class CheckStartup extends CheckEndpoint implements ICommand
         $result = parent::execute();
         $this->startup->status = $result;
         $this->startup->save();
+        return $result;
     }
 }

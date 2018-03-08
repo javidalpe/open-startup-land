@@ -21,6 +21,7 @@ class CreateMetricsTable extends Migration
             $table->date('recorded_at');
             $table->integer('startup_id')->unsigned();
             $table->foreign('startup_id')->references('id')->on('startups');
+            $table->unique(['startup_id', 'recorded_at']);
         });
     }
 

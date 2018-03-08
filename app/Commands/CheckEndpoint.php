@@ -9,6 +9,7 @@ use App\Metric;
 class CheckEndpoint implements ICommand
 {
     private $url;
+    protected $body;
 
     /**
      * CheckEndpoint constructor.
@@ -46,9 +47,8 @@ class CheckEndpoint implements ICommand
             $client = new \GuzzleHttp\Client();
             $res = $client->request('GET', $this->url);
             $statusCode = $res->getStatusCode();
-            $body = $res->getBody();
-
-            return $statusCode === 200 && $body && $this->isJson($body) && $this->hasParameters($body);
+            $this->body = $res->getBody();
+            return $statusCode === 200 && $this->body && $this->isJson($this->body) && $this->hasParameters($this->body);
         } catch (\Exception $e) {
             return false;
         }
