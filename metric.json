@@ -1,0 +1,60 @@
+[
+    {
+        "name": "id",
+        "dbType": "increments",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": false
+    },
+
+    {
+        "name": "monthly_revenue",
+        "dbType": "integer",
+        "validations": "required|numeric",
+        "searchable": false,
+        "fillable": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "paid_users",
+        "dbType": "integer",
+        "validations": "required|numeric",
+        "searchable": false,
+        "fillable": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
+        "name": "free_users",
+        "dbType": "integer",
+        "validations": "required|numeric",
+        "searchable": false,
+        "fillable": true,
+        "inForm": false,
+        "inIndex": false
+    },
+
+    {
+        "name": "currency",
+        "dbType": "string",
+        "validations": "required",
+        "searchable": false,
+        "fillable": true,
+        "inForm": false,
+        "inIndex": false
+    },
+
+    {
+        "name": "startup_id",
+        "dbType": "integer:unsigned:foreign,startups,id",
+        "htmlType": "text",
+        "relation": "mt1,Startup",
+        "inForm": false,
+        "inIndex": false
+    },
+]
