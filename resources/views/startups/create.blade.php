@@ -12,11 +12,13 @@
 
             <div class="box-body">
                 <div class="row">
+                    <div class="col-md-12">
                     {!! Form::open(['route' => 'startups.store']) !!}
 
                         @include('startups.fields')
 
                     {!! Form::close() !!}
+                    </div>
                 </div>
             </div>
         </div>

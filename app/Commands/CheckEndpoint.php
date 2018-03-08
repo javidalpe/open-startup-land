@@ -22,12 +22,7 @@ class CheckEndpoint implements ICommand
 
     public function execute()
     {
-        $client = new \GuzzleHttp\Client();
-        $res = $client->request('GET', $this->url);
-        $statusCode = $res->getStatusCode();
-        $body = $res->getBody();
-
-        return $statusCode === 200 && $body && $this->isJson($body) && $this->hasParameters($body);
+        return $this->checkUrl();
     }
 
     function isJson($string) {
@@ -40,5 +35,22 @@ class CheckEndpoint implements ICommand
         return isset($json[Metric::MONTHLY_REVENUE])
             && isset($json[Metric::PAID_USERS])
             && isset($json[Metric::FREE_USERS]);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function checkUrl()
+    {
+        try {
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('GET', $this->url);
+            $statusCode = $res->getStatusCode();
+            $body = $res->getBody();
+
+            return $statusCode === 200 && $body && $this->isJson($body) && $this->hasParameters($body);
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }

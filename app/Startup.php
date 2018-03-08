@@ -30,6 +30,7 @@ class Startup extends Model
         'speech',
         'website',
         'api_endpoint',
+        'status',
         'currency',
         'user_id'
     ];
@@ -44,6 +45,7 @@ class Startup extends Model
         'speech' => 'string',
         'website' => 'string',
         'api_endpoint' => 'string',
+        'status' => 'boolean',
         'currency' => 'string',
         'user_id' => 'integer'
     ];

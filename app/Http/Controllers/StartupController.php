@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Commands\CheckEndpoint;
+use App\Commands\CheckStartup;
+use App\Handlers\CommandHandler;
 use App\Http\Requests\CreateStartupRequest;
 use App\Http\Requests\UpdateStartupRequest;
 use App\Repositories\StartupRepository;
@@ -15,10 +18,12 @@ class StartupController extends Controller
 {
     /** @var  StartupRepository */
     private $startupRepository;
+    private $commandHandler;
 
-    public function __construct(StartupRepository $startupRepo)
+    public function __construct(StartupRepository $startupRepo, CommandHandler $commandHandler)
     {
         $this->startupRepository = $startupRepo;
+        $this->commandHandler = $commandHandler;
     }
 
     /**
@@ -58,6 +63,8 @@ class StartupController extends Controller
         $input = $request->all();
 	    $input['user_id'] = Auth::id();
         $startup = $this->startupRepository->create($input);
+
+        $this->commandHandler->executeCommand(new CheckStartup($startup));
 
         Flash::success('Startup saved successfully.');
 
@@ -123,6 +130,8 @@ class StartupController extends Controller
         }
 
         $startup = $this->startupRepository->update($request->all(), $id);
+
+        $this->commandHandler->executeCommand(new CheckStartup($startup));
 
         Flash::success('Startup updated successfully.');
 

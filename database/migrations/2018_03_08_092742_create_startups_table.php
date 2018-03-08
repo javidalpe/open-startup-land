@@ -18,7 +18,8 @@ class CreateStartupsTable extends Migration
             $table->string('name');
             $table->string('speech');
             $table->string('website');
-            $table->string('api_endpoint');
+            $table->string('api_endpoint')->nullable();
+            $table->boolean('status')->default(false);
             $table->string('currency');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
