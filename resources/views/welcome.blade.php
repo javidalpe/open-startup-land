@@ -82,12 +82,15 @@
                     {{ config('app.name', 'Laravel') }}
                 </div>
 
+                <h4>Last startups</h4>
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    @foreach ($new as $startup)
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-body">
+                                <div class="card-title">{{$startup->name}}</div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

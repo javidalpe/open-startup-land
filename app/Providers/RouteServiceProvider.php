@@ -59,7 +59,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapDashboardRoutes()
     {
         Route::middleware('dashboard')
-            ->namespace($this->namespace)
+            ->namespace($this->namespace . '\Dashboard')
             ->group(base_path('routes/dashboard.php'));
     }
 

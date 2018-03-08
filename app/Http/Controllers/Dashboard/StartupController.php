@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Dashboard;
 
-use App\Commands\CheckEndpoint;
 use App\Commands\CheckStartup;
 use App\Handlers\CommandHandler;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStartupRequest;
 use App\Http\Requests\UpdateStartupRequest;
 use App\Repositories\StartupRepository;

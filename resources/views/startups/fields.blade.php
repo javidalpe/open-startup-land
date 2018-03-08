@@ -18,7 +18,7 @@
 
 <!-- Api Endpoint Field -->
 <div class="form-group col-sm-6">
-    {!! Form::label('api_endpoint', 'Api Endpoint:') !!}
+    {!! Form::label('api_endpoint', 'Stats Api Endpoint:') !!}
     {!! Form::text('api_endpoint', null, ['class' => 'form-control']) !!}
 </div>
 

@@ -11,10 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', 'LandingController@index')->name('landing');
 
 Auth::routes();
 

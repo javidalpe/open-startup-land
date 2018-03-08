@@ -78,4 +78,9 @@ class Startup extends Model
     {
         return $this->hasMany(\App\Metric::class);
     }
+
+
+    public function scopeReady($query) {
+        return $query->where('status', true);
+    }
 }
