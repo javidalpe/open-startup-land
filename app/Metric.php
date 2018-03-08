@@ -57,6 +57,10 @@ class Metric extends Model
         self::FREE_USERS => 'required|numeric'
     ];
 
+    public $append = [
+        'date'
+    ];
+
     public $timestamps = false;
 
     /**
@@ -65,5 +69,11 @@ class Metric extends Model
     public function startup()
     {
         return $this->belongsTo(\App\Startup::class);
+    }
+
+
+    public function getDateAttribute()
+    {
+        return $this->recorded_at->formatLocalized('%d %B');
     }
 }

@@ -83,13 +83,13 @@
                 </div>
 
                 <h4>Last startups</h4>
-                <div class="links">
+                <a class="links">
                     @foreach ($new as $startup)
-                        <div class="card" style="width: 18rem;">
+                        <a class="card" style="width: 18rem;" href="{{route('landing.startup', [str_slug($startup->name), $startup->id])}}">
                             <div class="card-body">
                                 <div class="card-title">{{$startup->name}}</div>
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
             </div>

@@ -13,6 +13,8 @@
 
 Route::get('/', 'LandingController@index')->name('landing');
 
+Route::get('/{slug}-{id}', 'LandingController@startup')->name('landing.startup');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
