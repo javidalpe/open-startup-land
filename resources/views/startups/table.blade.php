@@ -11,7 +11,7 @@
     <tbody>
     @foreach($startups as $startup)
         <tr>
-            <td><a href="{{route('landing.startup', [$startup->name, $startup->id])}}">{!! $startup->name !!}</a></td>
+            <td>@include('components.startup')</td>
             <td>{!! $startup->speech !!}</td>
             <td>{!! $startup->website !!}</td>
             <td>@include('startups.components.status')</td>

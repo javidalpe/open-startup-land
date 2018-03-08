@@ -1,5 +1,6 @@
 <?php
 
+use App\Metric;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
@@ -15,9 +16,9 @@ class CreateMetricsTable extends Migration
     {
         Schema::create('metrics', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('monthly_revenue');
-            $table->integer('paid_users');
-            $table->integer('free_users');
+            $table->integer(Metric::MONTHLY_REVENUE);
+            $table->integer(Metric::PAID_USERS);
+            $table->integer(Metric::FREE_USERS);
             $table->date('recorded_at');
             $table->integer('startup_id')->unsigned();
             $table->foreign('startup_id')->references('id')->on('startups');

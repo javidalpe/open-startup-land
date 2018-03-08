@@ -9,14 +9,6 @@ use Illuminate\Database\Eloquent\Model as Model;
  *
  * @package App
  * @version March 8, 2018, 11:18 am UTC
- * @property \App\Startup startup
- * @property integer monthly_revenue
- * @property integer paid_users
- * @property integer free_users
- * @property date recorded_at
- * @property integer startup_id
- * @property-read mixed $date
- * @property-read \App\Startup $startup
  * @mixin \Eloquent
  * @property int $id
  * @property int $monthly_revenue
@@ -30,6 +22,8 @@ use Illuminate\Database\Eloquent\Model as Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Metric wherePaidUsers($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Metric whereRecordedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Metric whereStartupId($value)
+ * @property-read mixed $date
+ * @property-read \App\Startup $startup
  */
 class Metric extends Model
 {

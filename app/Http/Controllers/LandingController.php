@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Criteria\HasReadyStartupsCriteria;
 use App\Metric;
+use App\Repositories\StartupRepository;
+use App\Repositories\UserRepository;
 use App\Startup;
 use App\User;
 use Illuminate\Http\Request;
@@ -10,6 +13,15 @@ use Carbon\Carbon;
 
 class LandingController extends Controller
 {
+	private $startupRepository;
+	private $userRepository;
+
+	public function __construct(StartupRepository $startupRepo, UserRepository $userRepository)
+	{
+		$this->startupRepository = $startupRepo;
+		$this->userRepository = $userRepository;
+	}
+
 	public function index()
 	{
 		$topStartups = Metric::orderBy(Metric::MONTHLY_REVENUE, 'desc')
@@ -19,15 +31,17 @@ class LandingController extends Controller
 			->get();
 
 		$startups = Startup::orderBy('name')->ready()->get();
-		$makers = User::orderBy('name')
-			->whereHas('startups', function ($query) {
-				return $query->ready();
-			})->get();
+
+		$topMakers = $this->userRepository->orderBy(Metric::MONTHLY_REVENUE, 'desc')->get();
+
+		$this->userRepository->pushCriteria(new HasReadyStartupsCriteria());
+		$makers = $this->userRepository->orderBy('name')->get();
 
 		$data = [
+			'topMakers' => $topMakers,
 			'topStartups' => $topStartups,
-			'startups' => $startups,
-			'makers' => $makers,
+			'startups'    => $startups,
+			'makers'      => $makers,
 
 		];
 
@@ -59,28 +73,17 @@ class LandingController extends Controller
 	{
 		$user = User::findOrFail($id);
 		$startups = $user->startups()->ready()->get();
+		$first = $user->startups()->ready()->first();
 
-		$revenue = 0;
-		$free = 0;
-		$paid = 0;
-		foreach ($startups as $startup) {
-			$last = $startup->metrics()->orderBy('recorded_at', 'desc')->first();
-
-			if (!$last) continue;
-
-			$revenue += $last->monthly_revenue;
-			$free += $last->free_users;
-			$paid += $last->paid_users;
-
-			$currency = $startup->currency;
+		if ($first) {
+			$currency = $first->currency;
+		} else {
+			$currency = 'USD';
 		}
 
 		$data = [
 			'user'     => $user,
 			'startups' => $startups,
-			'revenue'  => $revenue,
-			'paid'     => $paid,
-			'free'     => $free,
 			'currency' => $currency,
 		];
 

@@ -5,7 +5,7 @@
 		<div class="col-md-4">
 			@component('components.card')
 				<h5 class="card-subtitle text-muted">Total monthly revenue:</h5>
-				<h1 class="card-title">@money($revenue, $currency)
+				<h1 class="card-title">@money($user->monthly_revenue*100, $currency)
 					<small>/month</small>
 				</h1>
 			@endcomponent
@@ -13,13 +13,13 @@
 		<div class="col-md-4">
 			@component('components.card')
 				<h5 class="card-subtitle text-muted">Total free users:</h5>
-				<h1 class="card-title">{{$free}}</h1>
+				<h1 class="card-title">{{$user->free_users}}</h1>
 			@endcomponent
 		</div>
 		<div class="col-md-4">
 			@component('components.card')
 				<h5 class="card-subtitle text-muted">Total paid users:</h5>
-				<h1 class="card-title">{{$paid}}</h1>
+				<h1 class="card-title">{{$user->paid_users}}</h1>
 			@endcomponent
 		</div>
 	</div>

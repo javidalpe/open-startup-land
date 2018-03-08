@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Criteria\HasReadyStartupsCriteria;
 use App\Jobs\UpdateStartupMetricsJob;
-use App\Startup;
+use App\Jobs\UpdateUserMetricsJob;
+use App\Repositories\UserRepository;
 use Illuminate\Console\Command;
 
 class DailyMetricsCommand extends Command
@@ -22,14 +24,18 @@ class DailyMetricsCommand extends Command
      */
     protected $description = 'Update daily startup metrics';
 
+    private $repository;
+
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserRepository $repository)
     {
         parent::__construct();
+        $this->repository = $repository;
+	    $this->repository->pushCriteria(new HasReadyStartupsCriteria());
     }
 
     /**
@@ -39,9 +45,13 @@ class DailyMetricsCommand extends Command
      */
     public function handle()
     {
-        $startups = Startup::ready()->get();
-        foreach ($startups as $startup) {
-            dispatch(new UpdateStartupMetricsJob($startup));
-        }
+    	$users = $this->repositor->all();
+    	foreach ($users as $user) {
+		    $startups = $user->startups()->ready()->get();
+		    foreach ($startups as $startup) {
+			    dispatch(new UpdateStartupMetricsJob($startup));
+		    }
+		    dispatch(new UpdateUserMetricsJob($user));
+	    }
     }
 }

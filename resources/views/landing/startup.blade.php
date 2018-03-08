@@ -5,7 +5,7 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-body">
-					<h1 class="float-right mt-4">@money($revenue, $startup->currency)
+					<h1 class="float-right mt-4">@money($revenue*100, $startup->currency)
 						<small>/month</small>
 					</h1>
 					<h5 class="card-title">{{$startup->name}}</h5>

@@ -48,14 +48,12 @@
 				<h5 class="card-title">Top makers:</h5>
 				<small class="text-muted">By total monthly revenue</small>
 				<dl class="row">
-					<dt class="col-8"><a href="">Tomas Santoro</a></dt>
-					<dd class="col-4 text-right">24,2547$</dd>
-					<dt class="col-8"><a href="">Tomas Santoro</a></dt>
-					<dd class="col-4 text-right">24,2547$</dd>
-					<dt class="col-8"><a href="">Tomas Santoro</a></dt>
-					<dd class="col-4 text-right">24,2547$</dd>
-					<dt class="col-8"><a href="">Tomas Santoro</a></dt>
-					<dd class="col-4 text-right">24,2547$</dd>
+					@foreach($topMakers as $user)
+						<dt class="col-8">@include('components.maker')
+						</dt>
+						<dd class="col-4 text-right">@money($user->monthly_revenue*100, 'USD')
+						</dd>
+					@endforeach
 				</dl>
 			@endcomponent
 		</div>
@@ -65,10 +63,9 @@
 				<small class="text-muted">By monthly revenue</small>
 				<dl class="row">
 					@foreach($topStartups as $metric)
-						<dt class="col-8"><a
-									href="{{route('landing.startup',[$metric->startup->id, str_slug($metric->startup->name)])}}">{{$metric->startup->name}}</a>
+						<dt class="col-8">@include('components.startup', ['startup' => $metric->startup])
 						</dt>
-						<dd class="col-4 text-right">@money($metric->monthly_revenue, $metric->startup->currency)
+						<dd class="col-4 text-right">@money($metric->monthly_revenue*100, $metric->startup->currency)
 						</dd>
 					@endforeach
 				</dl>
@@ -106,6 +103,8 @@
 			</div>
 		@endforeach
 	</div>
+
+		@include('components.footer')
 </div>
 
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Metric;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -19,6 +20,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->rememberToken();
+	        $table->string('avatar')->nullable();
+	        $table->integer(Metric::MONTHLY_REVENUE)->default(0);
+	        $table->integer(Metric::PAID_USERS)->default(0);
+	        $table->integer(Metric::FREE_USERS)->default(0);
             $table->timestamps();
         });
     }

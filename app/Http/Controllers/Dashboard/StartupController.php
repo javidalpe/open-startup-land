@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Commands\UpdateStartupMetrics;
+use App\Commands\UpdateUserMetrics;
 use App\Handlers\CommandHandler;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStartupRequest;
@@ -64,7 +65,8 @@ class StartupController extends Controller
 	    $input['user_id'] = Auth::id();
         $startup = $this->startupRepository->create($input);
 
-        $this->commandHandler->executeCommand(new UpdateStartupMetrics($startup));
+	    $this->commandHandler->executeCommand(new UpdateStartupMetrics($startup));
+	    $this->commandHandler->executeCommand(new UpdateUserMetrics(Auth::user()));
 
         Flash::success('Startup saved successfully 👌.');
 
@@ -132,6 +134,7 @@ class StartupController extends Controller
         $startup = $this->startupRepository->update($request->all(), $id);
 
         $this->commandHandler->executeCommand(new UpdateStartupMetrics($startup));
+	    $this->commandHandler->executeCommand(new UpdateUserMetrics(Auth::user()));
 
         Flash::success('Startup updated successfully 👌.');
 
@@ -155,7 +158,9 @@ class StartupController extends Controller
             return redirect(route('startups.index'));
         }
 
+	    $startup->metrics()->delete();
         $this->startupRepository->delete($id);
+	    $this->commandHandler->executeCommand(new UpdateUserMetrics(Auth::user()));
 
         Flash::success('Startup deleted successfully 👌.');
 

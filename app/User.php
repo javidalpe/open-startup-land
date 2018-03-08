@@ -25,6 +25,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
+ * @property string|null $avatar
+ * @property int $monthly_revenue
+ * @property int $paid_users
+ * @property int $free_users
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereAvatar($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereFreeUsers($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereMonthlyRevenue($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\User wherePaidUsers($value)
  */
 class User extends Authenticatable
 {
@@ -36,7 +44,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+	    'email',
+	    'password',
+	    Metric::MONTHLY_REVENUE,
+	    Metric::FREE_USERS,
+	    Metric::PAID_USERS,
     ];
 
     /**
