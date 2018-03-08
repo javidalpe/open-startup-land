@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
 
-@section('content')
+@section('container')
     <section class="content-header">
         <h1 class="pull-left">Startups</h1>
         <h1 class="pull-right">
