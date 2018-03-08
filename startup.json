@@ -41,6 +41,15 @@
         "inIndex": true
     },
     {
+        "name": "currency",
+        "dbType": "string",
+        "validations": "required",
+        "searchable": false,
+        "fillable": true,
+        "inForm": true,
+        "inIndex": false
+    },
+    {
         "name": "user_id",
         "dbType": "integer:unsigned:foreign,users,id",
         "htmlType": "text",

@@ -40,16 +40,6 @@
     },
 
     {
-        "name": "currency",
-        "dbType": "string",
-        "validations": "required",
-        "searchable": false,
-        "fillable": true,
-        "inForm": false,
-        "inIndex": false
-    },
-
-    {
         "name": "startup_id",
         "dbType": "integer:unsigned:foreign,startups,id",
         "htmlType": "text",
