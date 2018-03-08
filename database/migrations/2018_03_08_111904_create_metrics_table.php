@@ -18,6 +18,7 @@ class CreateMetricsTable extends Migration
             $table->integer('monthly_revenue');
             $table->integer('paid_users');
             $table->integer('free_users');
+            $table->date('recorded_at');
             $table->integer('startup_id')->unsigned();
             $table->foreign('startup_id')->references('id')->on('startups');
         });

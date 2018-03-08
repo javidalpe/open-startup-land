@@ -40,6 +40,14 @@
     },
 
     {
+        "name": "recorded_at",
+        "dbType": "date",
+        "searchable": false,
+        "fillable": true,
+        "inForm": false,
+        "inIndex": false
+    },
+    {
         "name": "startup_id",
         "dbType": "integer:unsigned:foreign,startups,id",
         "htmlType": "text",

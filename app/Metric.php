@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model as Model;
 /**
  * Class Metric
  * @package App
- * @version March 8, 2018, 9:41 am UTC
+ * @version March 8, 2018, 11:18 am UTC
  *
  * @property \App\Startup startup
  * @property integer monthly_revenue
  * @property integer paid_users
  * @property integer free_users
+ * @property date recorded_at
  * @property integer startup_id
  */
 class Metric extends Model
@@ -26,6 +27,7 @@ class Metric extends Model
         'monthly_revenue',
         'paid_users',
         'free_users',
+        'recorded_at',
         'startup_id'
     ];
 
@@ -38,6 +40,7 @@ class Metric extends Model
         'monthly_revenue' => 'integer',
         'paid_users' => 'integer',
         'free_users' => 'integer',
+        'recorded_at' => 'date',
         'startup_id' => 'integer'
     ];
 
