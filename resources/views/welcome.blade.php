@@ -1,109 +1,113 @@
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+	<title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+	<!-- Fonts -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
 
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Raleway', sans-serif;
-            font-weight: 100;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-    </style>
 </head>
 <body>
-<div class="flex-center position-ref mt-5">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-                <a href="{{ route('register') }}">Register</a>
-            @endauth
-        </div>
-    @endif
 
-    <div class="content">
-        <div class="title m-b-md">
-            Open Startup Land
-        </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<div class="container">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+		        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<a class="navbar-brand" href="#">{{config('app.name')}}</a>
+			<ul class="nav ml-auto">
+				@auth
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url('/home') }}">Home</a>
+					</li>
+				@else
+					<li class="nav-item">
+						<a class="nav-link" href="{{ route('login') }}">Login</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ route('register') }}">Register</a>
+					</li>
+				@endauth
+			</ul>
 
-        <p class="lead">Welcome to the land of the brave. These wonderful companies are embracing transparency and
-            openness by sharing their metrics with everyone.</p>
-
-    </div>
-</div>
+		</div>
+	</div>
+</nav>
 
 <div class="container mt-5">
-    <h4>Last startups</h4>
-    <div class="row">
-        @foreach ($new as $startup)
-            <div class="col-md-4">
-                <div class="card" href="{{route('landing.startup', [str_slug($startup->name), $startup->id])}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{$startup->name}}</h5>
-                        <p class="card-text">{{$startup->speech}}</p>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
+	<div class="row">
+		<div class="col-md-6">
+			@component('components.card')
+				<h5 class="card-title">Top makers:</h5>
+				<small class="text-muted">By total monthly revenue</small>
+				<dl class="row">
+					<dt class="col-8"><a href="">Tomas Santoro</a></dt>
+					<dd class="col-4 text-right">24,2547$</dd>
+					<dt class="col-8"><a href="">Tomas Santoro</a></dt>
+					<dd class="col-4 text-right">24,2547$</dd>
+					<dt class="col-8"><a href="">Tomas Santoro</a></dt>
+					<dd class="col-4 text-right">24,2547$</dd>
+					<dt class="col-8"><a href="">Tomas Santoro</a></dt>
+					<dd class="col-4 text-right">24,2547$</dd>
+				</dl>
+			@endcomponent
+		</div>
+		<div class="col-md-6">
+			@component('components.card')
+				<h5 class="card-title">Top startups:</h5>
+				<small class="text-muted">By monthly revenue</small>
+				<dl class="row">
+					@foreach($topStartups as $metric)
+						<dt class="col-8"><a
+									href="{{route('landing.startup',[$metric->startup->id, str_slug($metric->startup->name)])}}">{{$metric->startup->name}}</a>
+						</dt>
+						<dd class="col-4 text-right">@money($metric->monthly_revenue, $metric->startup->currency)
+						</dd>
+					@endforeach
+				</dl>
+			@endcomponent
+		</div>
+	</div>
 
+
+	<div class="row">
+		<div class="col-md-12 mt-5">
+			<p class="lead">Open Startup Land, where makers and startups share their metrics. <a
+						href="{{route('register')}}">Join the movemenet.</a></p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 mt-5">
+			<h5>Startups by name:</h5>
+		</div>
+		@foreach($startups as $startup)
+			<div class="col-md-3">
+				@include('components.startup')
+			</div>
+		@endforeach
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 mt-5">
+			<h5>Creators by name:</h5>
+		</div>
+
+		@foreach($makers as $user)
+			<div class="col-md-3">
+				@include('components.maker')
+			</div>
+		@endforeach
+	</div>
 </div>
+
+
 </body>
 </html>

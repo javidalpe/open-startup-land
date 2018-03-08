@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\API\CreateStartupAPIRequest;
 use App\Http\Requests\API\UpdateStartupAPIRequest;
 use App\Startup;
 use App\Repositories\StartupRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\AppBaseController;
 use InfyOm\Generator\Criteria\LimitOffsetCriteria;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
@@ -17,7 +17,7 @@ use Response;
  * @package App\Http\Controllers\API
  */
 
-class StartupAPIController extends AppBaseController
+class StartupAPIController extends Controller
 {
     /** @var  StartupRepository */
     private $startupRepository;
@@ -40,7 +40,7 @@ class StartupAPIController extends AppBaseController
         $this->startupRepository->pushCriteria(new LimitOffsetCriteria($request));
         $startups = $this->startupRepository->all();
 
-        return $this->sendResponse($startups->toArray(), 'Startups retrieved successfully');
+        return $this->sendResponse($startups->toArray(), 'Startups retrieved successfully 👌');
     }
 
     /**
@@ -57,7 +57,7 @@ class StartupAPIController extends AppBaseController
 
         $startups = $this->startupRepository->create($input);
 
-        return $this->sendResponse($startups->toArray(), 'Startup saved successfully');
+        return $this->sendResponse($startups->toArray(), 'Startup saved successfully 👌');
     }
 
     /**
@@ -77,7 +77,7 @@ class StartupAPIController extends AppBaseController
             return $this->sendError('Startup not found');
         }
 
-        return $this->sendResponse($startup->toArray(), 'Startup retrieved successfully');
+        return $this->sendResponse($startup->toArray(), 'Startup retrieved successfully 👌');
     }
 
     /**
@@ -102,7 +102,7 @@ class StartupAPIController extends AppBaseController
 
         $startup = $this->startupRepository->update($input, $id);
 
-        return $this->sendResponse($startup->toArray(), 'Startup updated successfully');
+        return $this->sendResponse($startup->toArray(), 'Startup updated successfully 👌');
     }
 
     /**
@@ -124,6 +124,6 @@ class StartupAPIController extends AppBaseController
 
         $startup->delete();
 
-        return $this->sendResponse($id, 'Startup deleted successfully');
+        return $this->sendResponse($id, 'Startup deleted successfully 👌');
     }
 }

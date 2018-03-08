@@ -1,0 +1,1 @@
+<a href="{{route('landing.startup', [$startup->id, str_slug($startup->name)])}}">{{$startup->name}}</a>

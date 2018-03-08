@@ -20,7 +20,7 @@
 <!-- Currency Field -->
 <div class="form-group col-sm-6">
     {!! Form::label('currency', 'Currency:') !!}
-    {!! Form::select('currency', ['USD' => 'USD', 'EUR' => 'EUR'], null, ['class' => 'form-control']) !!}
+    {!! Form::select('currency', ['USD' => 'USD', 'EUR' => 'EUR', 'GBP' => 'GBP'], null, ['class' => 'form-control']) !!}
     <small class="form-text text-muted">Currency to show at charts</small>
 </div>
 
@@ -35,5 +35,5 @@
 <!-- Submit Field -->
 <div class="form-group col-sm-12">
     {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-    <a href="{!! route('startups.index') !!}" class="btn btn-light">Cancel</a>
+    <a href="{!! route('startups.index') !!}" class="btn btn-secondary">Cancel</a>
 </div>

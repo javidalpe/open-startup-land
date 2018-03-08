@@ -4,25 +4,22 @@
         <th>Name</th>
         <th>Speech</th>
         <th>Website</th>
-        <th>Status</th>
+        <th>Metrics status</th>
         <th colspan="3">Action</th>
     </tr>
     </thead>
     <tbody>
     @foreach($startups as $startup)
         <tr>
-            <td>{!! $startup->name !!}</td>
+            <td><a href="{{route('landing.startup', [$startup->name, $startup->id])}}">{!! $startup->name !!}</a></td>
             <td>{!! $startup->speech !!}</td>
             <td>{!! $startup->website !!}</td>
             <td>@include('startups.components.status')</td>
             <td>
                 {!! Form::open(['route' => ['startups.destroy', $startup->id], 'method' => 'delete']) !!}
                 <div class='btn-group'>
-                    <a href="{!! route('startups.show', [$startup->id]) !!}" class='btn btn-light btn-xs' role="button"><i
-                                class="glyphicon glyphicon-eye-open"></i></a>
-                    <a href="{!! route('startups.edit', [$startup->id]) !!}" class='btn btn-light btn-xs'><i
-                                class="glyphicon glyphicon-edit"></i></a>
-                    {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                    <a href="{!! route('startups.edit', [$startup->id]) !!}" class='btn btn-secondary btn-xs'>Edit</a>
+                    {!! Form::button('Delete', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                 </div>
                 {!! Form::close() !!}
             </td>

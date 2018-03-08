@@ -66,7 +66,7 @@ class StartupController extends Controller
 
         $this->commandHandler->executeCommand(new UpdateStartupMetrics($startup));
 
-        Flash::success('Startup saved successfully.');
+        Flash::success('Startup saved successfully 👌.');
 
         return redirect(route('startups.index'));
     }
@@ -133,7 +133,7 @@ class StartupController extends Controller
 
         $this->commandHandler->executeCommand(new UpdateStartupMetrics($startup));
 
-        Flash::success('Startup updated successfully.');
+        Flash::success('Startup updated successfully 👌.');
 
         return redirect(route('startups.index'));
     }
@@ -157,7 +157,7 @@ class StartupController extends Controller
 
         $this->startupRepository->delete($id);
 
-        Flash::success('Startup deleted successfully.');
+        Flash::success('Startup deleted successfully 👌.');
 
         return redirect(route('startups.index'));
     }

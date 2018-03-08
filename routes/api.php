@@ -24,4 +24,4 @@ Route::get('/open', function (Request $request) {
 });
 
 
-Route::resource('startups', 'StartupAPIController');
+//Route::resource('startups', 'StartupAPIController');
