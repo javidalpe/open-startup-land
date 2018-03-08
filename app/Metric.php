@@ -20,26 +20,28 @@ class Metric extends Model
 {
 
     public $table = 'metrics';
-    
+
+    const MONTHLY_REVENUE = 'monthly_revenue';
+    const PAID_USERS = 'paid_users';
+    const FREE_USERS = 'free_users';
 
 
     public $fillable = [
-        'monthly_revenue',
-        'paid_users',
-        'free_users',
+        self::MONTHLY_REVENUE,
+        self::PAID_USERS,
+        self::FREE_USERS,
         'recorded_at',
         'startup_id'
     ];
-
     /**
      * The attributes that should be casted to native types.
      *
      * @var array
      */
     protected $casts = [
-        'monthly_revenue' => 'integer',
-        'paid_users' => 'integer',
-        'free_users' => 'integer',
+        self::MONTHLY_REVENUE => 'integer',
+        self::PAID_USERS => 'integer',
+        self::FREE_USERS => 'integer',
         'recorded_at' => 'date',
         'startup_id' => 'integer'
     ];
@@ -50,9 +52,9 @@ class Metric extends Model
      * @var array
      */
     public static $rules = [
-        'monthly_revenue' => 'required|numeric',
-        'paid_users' => 'required|numeric',
-        'free_users' => 'required|numeric'
+        self::MONTHLY_REVENUE => 'required|numeric',
+        self::PAID_USERS => 'required|numeric',
+        self::FREE_USERS => 'required|numeric'
     ];
 
     /**
