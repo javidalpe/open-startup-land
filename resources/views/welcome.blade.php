@@ -54,7 +54,7 @@
 					@foreach($topMakers as $user)
 						<dt class="col-8">@include('components.maker')
 						</dt>
-						<dd class="col-4 text-right">@money($user->monthly_revenue*100, 'USD')
+						<dd class="col-4 text-right">@money($user->monthly_revenue*100, 'EUR')
 						</dd>
 					@endforeach
 				</dl>
