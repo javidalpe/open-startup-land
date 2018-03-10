@@ -45,7 +45,7 @@ class DailyMetricsCommand extends Command
      */
     public function handle()
     {
-    	$users = $this->repositor->all();
+    	$users = $this->repository->all();
     	foreach ($users as $user) {
 		    $startups = $user->startups()->ready()->get();
 		    foreach ($startups as $startup) {
