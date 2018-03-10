@@ -14,23 +14,21 @@
 <!-- Website Field -->
 <div class="form-group col-sm-6">
 	{!! Form::label('website', 'Website:') !!}
-	{!! Form::text('website', null, ['class' => 'form-control']) !!}
+	{!! Form::url('website', null, ['class' => 'form-control']) !!}
 </div>
 
 <!-- Currency Field -->
 <div class="form-group col-sm-6">
 	{!! Form::label('currency', 'Currency:') !!}
 	{!! Form::select('currency', ['USD' => 'USD', 'EUR' => 'EUR', 'GBP' => 'GBP'], null, ['class' => 'form-control']) !!}
-	<small class="form-text text-muted">Currency you are using</small>
+	<small class="form-text text-muted">Currency in wich you are operating.</small>
 </div>
 
 <!-- Api Endpoint Field -->
 <div class="form-group col-sm-6">
 	{!! Form::label('api_endpoint', 'Your metrics Api Endpoint:') !!}
-	{!! Form::text('api_endpoint', null, ['class' => 'form-control']) !!}
-	<small class="form-text text-muted">Where we will get your metrics every day. Must return a JSON with
-		<i>{{App\Metric::MONTHLY_REVENUE}}</i>, <i>{{App\Metric::PAID_USERS}}</i> and <i>{{App\Metric::FREE_USERS}}</i>.
-		<a class="" data-toggle="collapse" href="#collapse" aria-expanded="false" aria-controls="collapse">
+	{!! Form::url('api_endpoint', null, ['class' => 'form-control']) !!}
+	<small class="form-text text-muted">Where we will get your metrics every day. <a class="" data-toggle="collapse" href="#collapse" aria-expanded="false" aria-controls="collapse">
 			Read more
 		</a>
 	</small>

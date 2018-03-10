@@ -3,7 +3,7 @@
 @section('container')
     <section class="content-header">
         <h1>
-            Startup
+            New Startup
         </h1>
     </section>
     <div class="content">
