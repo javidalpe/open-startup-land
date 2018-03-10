@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Commands\UpdateStartupMetrics;
 use App\Commands\UpdateUserMetrics;
+use App\Criteria\OfUser;
 use App\Handlers\CommandHandler;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateStartupRequest;
@@ -35,7 +36,8 @@ class StartupController extends Controller
      */
     public function index(Request $request)
     {
-        $this->startupRepository->pushCriteria(new RequestCriteria($request));
+	    $this->startupRepository->pushCriteria(new RequestCriteria($request));
+	    $this->startupRepository->pushCriteria(new OfUser(Auth::user()));
         $startups = $this->startupRepository->all();
 
         return view('startups.index')
@@ -90,6 +92,8 @@ class StartupController extends Controller
             return redirect(route('startups.index'));
         }
 
+	    $this->authorize('view', $startup);
+
         return view('startups.show')->with('startup', $startup);
     }
 
@@ -110,7 +114,9 @@ class StartupController extends Controller
             return redirect(route('startups.index'));
         }
 
-        return view('startups.edit')->with('startup', $startup);
+	    $this->authorize('view', $startup);
+
+	    return view('startups.edit')->with('startup', $startup);
     }
 
     /**
@@ -131,7 +137,10 @@ class StartupController extends Controller
             return redirect(route('startups.index'));
         }
 
-        $startup = $this->startupRepository->update($request->all(), $id);
+	    $this->authorize('update', $startup);
+
+
+	    $startup = $this->startupRepository->update($request->all(), $id);
 
         $this->commandHandler->executeCommand(new UpdateStartupMetrics($startup));
 	    $this->commandHandler->executeCommand(new UpdateUserMetrics(Auth::user()));
@@ -157,6 +166,9 @@ class StartupController extends Controller
 
             return redirect(route('startups.index'));
         }
+
+	    $this->authorize('delete', $startup);
+
 
 	    $startup->metrics()->delete();
         $this->startupRepository->delete($id);
