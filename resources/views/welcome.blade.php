@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<link rel="icon" type="image/png" href="/favicon.png">
 	<title>{{ config('app.name', 'Laravel') }}</title>
 
 	<!-- Fonts -->
@@ -16,7 +16,7 @@
 	<div class="container">
 
 		<a class="navbar-brand" href="{{ url('/') }}">
-			{{ config('app.name', 'Laravel') }}
+			<img src="/img/logo.png" alt="" style="max-height: 32px">
 		</a>
 		<button class="navbar-toggler collapsed" type="button" data-toggle="collapse"
 		        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
